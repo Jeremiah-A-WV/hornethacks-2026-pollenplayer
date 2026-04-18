@@ -6,4 +6,6 @@ import http.client
 from streamlit_geolocation import streamlit_geolocation as st_gl
 
 
+st.title("Music")
+
 st.iframe("https://music.youtube.com/")
