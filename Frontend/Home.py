@@ -45,6 +45,10 @@ def Home():
 
     st.write("Where are you? Click the button below, and submit to find out! ")
     location = st_gl()
+    st.write(location)
+    
+    submit = st.button("Submit")
+
     def getLocation():
        lat = location['latitude']
        lng = location['longitude']
