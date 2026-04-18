@@ -1,0 +1,60 @@
+h1 {
+    color: #faf0ca;
+    font-family: Impact, fantasy;
+    text-decoration-line: underline;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-align {
+    display: flex;
+    justify-content: left;
+}
+
+.right-align {
+    display: flex;
+    justify-content: right;
+}
+
+body {
+    background-color: #5FAAE7;
+}
+
+p {
+    font-family: Optima, sans-serif;
+    color:aliceblue;
+}
+
+label {
+
+    color:aliceblue;
+
+}
+
+input {
+    background-color: #faf0ca;
+    border-color: #1E352F;
+    
+}
+
+button {
+    background-color: #faf0ca;
+    border-color: #1E352F;
+    
+}
+
+.button:hover {
+    background-color: #B1D2CA;
+    
+}
+
+.button:active {
+  background-color: #B1D2CA;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+
+}

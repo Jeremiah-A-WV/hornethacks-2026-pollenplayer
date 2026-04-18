@@ -1,0 +1,60 @@
+h1 {
+    color: #25413A;
+    font-family: Impact, fantasy;
+    text-decoration-line: underline;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-align {
+    display: flex;
+    justify-content: left;
+}
+
+.right-align {
+    display: flex;
+    justify-content: right;
+}
+
+body {
+    background-color: #051623;
+}
+
+p {
+    font-family: Optima, sans-serif;
+    color:aliceblue;
+}
+
+label {
+
+    color:aliceblue;
+
+}
+
+input {
+    background-color: #25413A;
+    border-color: black;
+    
+}
+
+button {
+    background-color: #25413A;
+    border-color: black;
+    
+}
+
+.button:hover {
+    background-color: #5FAAE7;
+    
+}
+
+.button:active {
+  background-color: #5FAAE7;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+
+}
