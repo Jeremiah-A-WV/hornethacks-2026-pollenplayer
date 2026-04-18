@@ -3,6 +3,7 @@ fastapi
 uvicorn
 pydantic
 requests
+dotenv
 
 # Processing
 ollama
@@ -11,3 +12,5 @@ ytmusicapi
 # User interface
 streamlit
 streamlit_geolocation
+st_pages
+streamlit_lottie
