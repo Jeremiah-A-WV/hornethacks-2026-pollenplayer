@@ -14,7 +14,7 @@ from streamlit_geolocation import streamlit_geolocation as st_gl
 
 # params = {
 #     'lat': x get from user,
-#     'lng': y get frpm user
+#     'lng': y get from user
 # }
 
 
@@ -33,8 +33,6 @@ from streamlit_geolocation import streamlit_geolocation as st_gl
 # else:
 #     print(f"Error: {response.status_code}, {response.text}")
 
-
-# use that data- look at count for weed pollen, tree pollen, and grass pollen
 
 # ---------------------------------------------------------
 
@@ -65,10 +63,17 @@ def Home():
             # compare zipcode to ambee api data location to determine to level of pollen in that area
             pass
 
+
+   
+
+
     location = st_gl()
 
     st.write("Location: ")
     st.write(location)
+
+    def getLocation():
+       pass
     
 
 pg = st.navigation([Home, "Music.py"])
