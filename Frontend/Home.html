@@ -8,27 +8,23 @@
 
     <body>
         <h1>PollenPlayer</h1>
-        <form>
+        <div>
+            <label for= "geoBtn">Location: </label>
+            <input type="submit" id="geoBtn" value="Submit"><br><br>
+
+            <!-- input and submit button for zipcode -->
             
-        <label for= "Location">Location: </label>
-        <input type="submit" id="Location" value="Submit"><br><br>
-
-        <!-- input and submit button for zipcode -->
-        
             <label for="Zipcode">Zipcode: </label>
-            <input type="text" id="Zipcode" name="Zipcode">
-            <input type="submit" for="Zipcode" value="Submit">
+            <input type="text" id="zipCode" name="Zipcode">
+            <input type="submit" for="zipCode" id="zipBtn" value="Submit">
+        </div>
 
-         </form>
+        <div style="margin-top: 20px;">
+            <h3 id="atmosphereDisplay"></h3>
+            <div id="videoContainer"></div>
+        </div>
          
-
+         <script src="script.js"></script>
     </body>
-
-
-
-
-
-
-
 
 </html>

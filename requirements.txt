@@ -4,6 +4,8 @@ uvicorn
 pydantic
 requests
 dotenv
+geopy
+asyncio
 
 # Processing
 ollama
