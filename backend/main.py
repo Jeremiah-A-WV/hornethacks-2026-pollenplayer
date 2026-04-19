@@ -76,11 +76,27 @@ async def generate_atmosphere(request: PollenPlayerRequest):
       * 0-50 (Clean): Bright, airy, upbeat tones.
       * 51-100 (Moderate): Neutral, atmospheric, steady.
       * 101+ (Hazardous): Dark, moody, heavy tones.
-    - Pollen Thresholds: 
-      * Low counts (0-14): Organic, outdoor vibes.
-      * Moderate counts (15-89): Acoustic, lo-fi.[p[p-[]]]
-      * High count (90-1499): Sleepy, experimental.
-      * Very high count (1500 or more): Indoor, muffled.
+    - Pollen Thresholds for each category: 
+        - Tree Pollen Levels
+            0-14	Low
+            15-89	Moderate
+            90-1499	High
+            1500 or more	Very High
+        - Grass Pollen Levels
+            0-4	Low
+            5-19	Moderate
+            20-199	High
+            200 or more	Very High
+        - Weed Pollen Levels
+            0-9	Low
+            10-49	Moderate
+            50-499	High
+            500 or more	Very High
+        - Total pollen thresholds:
+            * Low: Organic, outdoor vibes.
+            * Moderate counts: Acoustic, lo-fi.[p[p-[]]]
+            * High count: Sleepy, experimental.
+            * Very high count: Indoor, muffled.
 
     Example Outputs:
     - Bright acoustic outdoor morning
