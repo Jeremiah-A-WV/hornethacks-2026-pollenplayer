@@ -78,7 +78,7 @@ async def generate_atmosphere(request: PollenPlayerRequest):
       * 101+ (Hazardous): Dark, moody, heavy tones.
     - Pollen Thresholds: 
       * Low counts (0-14): Organic, outdoor vibes.
-      * Moderate counts (15-89): Acoustic, lo-fi.
+      * Moderate counts (15-89): Acoustic, lo-fi.[p[p-[]]]
       * High count (90-1499): Sleepy, experimental.
       * Very high count (1500 or more): Indoor, muffled.
 
