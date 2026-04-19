@@ -73,8 +73,13 @@ def parse_duration(d):
     if isinstance(d, str):
         parts = d.split(":")
         try:
-            return int(parts[0]) * 60 + int(parts[1])
-        except:
+            if len(parts) == 3:
+                return int(parts[0]) * 3600 + int(parts[1]) * 60 + int(parts[2])
+            elif len(parts) == 2:
+                return int(parts[0]) * 60 + int(parts[1])
+            elif len(parts) == 1:
+                return int(parts[0])
+        except ValueError:
             return 0
     return 0
 
@@ -185,20 +190,20 @@ async def generate_atmosphere(request: PollenPlayerRequest):
         ai_keywords = "Generic lo-fi beats"
 
     try:
-        search_res = yt.search(query=ai_keywords, filter="videos", limit=20)
+        search_res = yt.search(query=ai_keywords, filter="videos", limit=50)
         
         if search_res:
-            # video_ids = []
-            # max_song_length = 6 * 60
+            video_ids = []
+            max_song_length = 6 * 60
             
-            # for item in search_res:
-            #     duration = parse_duration(item.get('duration'))
+            for item in search_res:
+                duration = parse_duration(item.get('duration'))
 
-            #     if 'videoId' in item and 0 < duration <= max_song_length:
-            #         video_ids.append(item['videoId'])
+                if 'videoId' in item and 0 < duration <= max_song_length:
+                    video_ids.append(item['videoId'])
                 
-            #     if len(video_ids) >= 10:
-            #         break
+                if len(video_ids) >= 10:
+                    break
             video_ids = []
 
         for item in search_res:
