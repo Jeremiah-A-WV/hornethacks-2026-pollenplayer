@@ -7,3 +7,4 @@ class PollenPlayerResponse(BaseModel):
     pollen_count: PollenCount
     search_words: str
     video_ids: List[str]
+    recommendation: str
