@@ -1,0 +1,76 @@
+h1 {
+    color: #faf0ca;
+    font-family: Impact, fantasy;
+    text-decoration-line: underline;
+    font-size: 300%;
+    padding: 5px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-align {
+    display: flex;
+    justify-content: left;
+}
+
+.right-align {
+    display: flex;
+    justify-content: right;
+}
+
+body {
+    background-color: #5FAAE7;
+}
+
+p {
+    font-family: Optima, sans-serif;
+    color:aliceblue;
+    font-size: x-large;
+}
+
+label {
+
+    color:aliceblue;
+
+}
+
+input {
+    background-color: #faf0ca;
+    border-color: #1E352F;
+    
+}
+
+.button {
+    background-color: #faf0ca;
+    border-color: #1E352F;
+    border-width: 2px;
+	text-align: center;
+	display: inline-block;
+    padding: 3px;
+    color: black;
+    text-decoration: none;
+    border-radius: 30px;
+    
+}
+
+.button:hover {
+    background-color: #B1D2CA;
+    
+}
+
+.button:active {
+  background-color: #B1D2CA;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+
+}
+
+img {
+    scale: 30%;
+    position:absolute;
+}
+
