@@ -2,6 +2,19 @@ const BACKEND_URL = "http://localhost:8000/generate-atmosphere"
 
 document.getElementById('geoBtn').addEventListener('click', getGeoloc);
 document.getElementById('zipBtn').addEventListener('click', getZipCode);
+document.getElementById('darkModeButton').addEventListener('click', toggle);
+
+function toggle() {
+    var body = document.body;
+    var heading = document.h1;
+    var input = document.input;
+    var button = document.button;
+
+    body.classList.toggle("darkMode");
+    heading.classList.toggle("darkMode");
+    input.classList.toggle("darkMode");
+    button.classList.toggle("darkMode");
+}
 
 function getGeoloc() {
     if (navigator.geolocation) {
@@ -21,7 +34,7 @@ function getGeoloc() {
 function getZipCode() {
     const zipCode = document.getElementById('zipCode').value;
     if (zipCode) {
-        const payload = { type: "zip", zip_code: zipCode};
+        const payload = { type: "zip", zip_code: zipCode };
         toBackend(payload);
     } else {
         alert("Please enter a zipcode.")
@@ -34,7 +47,7 @@ async function toBackend(payload) {
     try {
         const response = await fetch(BACKEND_URL, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         });
 
@@ -49,17 +62,18 @@ async function toBackend(payload) {
 }
 
 function update(data) {
-    
+
     const playerDiv = document.getElementById('videoContainer');
-    
+    const greetingDiv = document.getElementById('greeting');
+
     if (data.video_ids && data.video_ids.length > 0) {
 
         const firstVideo = data.video_ids[0];
 
-        const playlistString = data.video_ids.length > 1 
-            ? `&playlist=${data.video_ids.slice(1).join(',')}` 
+        const playlistString = data.video_ids.length > 1
+            ? `&playlist=${data.video_ids.slice(1).join(',')}`
             : "";
-        
+
         playerDiv.innerHTML = `
             <iframe 
                 width="100%" 
@@ -69,6 +83,9 @@ function update(data) {
                 allow="autoplay; encrypted-media" 
                 allowfullscreen>
             </iframe>`;
+        
+        greetingDiv.innerHTML = null;
+        document.getElementById('atmosphereDisplay').innerText = null;
     } else {
         playerDiv.innerHTML = "<p>Could not find a track for this vibe.</p>";
     }

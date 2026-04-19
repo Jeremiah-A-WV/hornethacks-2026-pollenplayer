@@ -1,65 +1,52 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Pollen Player </title>
-        <link rel="stylesheet" href="Home.css">
-    </head>. 
 
-    <body>
-        
-        <h1 class="center">Pollen______Player
-            <img src="flowerlogo.png" alt="flowerlogo">
-        </h1> 
+<head>
+    <title>Pollen Player </title>
+    <link rel="stylesheet" href="Home.css">
+    <link rel="icon" type="image/x-icon" href="flowerlogo.png">
+</head>.
+
+<body>
+
+    <h1 class="center">Pollen______Player
+        <img src="flowerlogo.png" alt="flowerlogo">
+    </h1>
 
 
-        <br><br>
-        
-       
-        <form>
-        <p class="center">
-            Where are you? Click to enable location or enter your zipcode. 
+    <br><br>
+
+
+    <div>
+        <p class="center" id="greeting">
+            Where are you? Click to enable location or enter your zipcode.
         </p>
 
-        
-        
-        <label for= "Location">Location: </label>
-        <input class="button"  type="submit" id="Location" value="Enable"><br><br>
+
+
+        <label for="geoBtn">Location: </label>
+        <input class="button" type="submit" id="geoBtn" value="Find Me"><br><br>
 
         <!-- input and submit button for zipcode -->
-        
-            <label for="Zipcode" >Zipcode: </label>
-            <input type="text" id="Zipcode" name="Zipcode">
-            <input class="button" type="submit" for="Zipcode" value="Submit">
 
-        </form>
+        <label for="zipCode">Zipcode: </label>
+        <input type="text" id="zipCode" name="Zipcode">
+        <input class="button" id="zipBtn" type="submit" for="zipCode" value="Submit">
 
-        <script>
-        function toggle() {
-        var body = document.body;
-        var heading = document.h1;
-        var input = document.input;
-        var button = document.button;
+    </div>
 
-        body.classList.toggle("darkMode");
-        heading.classList.toggle("darkMode");
-        input.classList.toggle("darkMode");
-        button.classList.toggle("darkMode");
-        }
-</script>
-         
+    <div style="margin-top: 20px;">
+        <h3 id="atmosphereDisplay"></h3>
+        <div id="videoContainer"></div>
+    </div>
 
-    </body>
 
     <footer>
         <br><br><br>
-        <button class="button" onclick="toggle()">Toggle Dark Mode</button>
+        <button class="button" id="darkModeButton">Toggle Dark Mode</button>
     </footer>
 
-
-
-
-
-
-
+    <script src="../script.js"></script>
+</body>
 
 </html>
