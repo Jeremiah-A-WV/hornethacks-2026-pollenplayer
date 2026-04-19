@@ -86,6 +86,7 @@ async def generate_atmosphere(request: PollenPlayerRequest):
     - Bright acoustic outdoor morning
     - Indoor chillhop lofi beats
 
+    DO NOT USE THE WORDS AQI OR POLLEN IN THE QUERY
     DO NOT GIVE ANY EXPLAINATION OR ANY OTHER WORDS JUST
     Generate the 3-word (maximum of 4 words) Search Query for the current environment:
     """

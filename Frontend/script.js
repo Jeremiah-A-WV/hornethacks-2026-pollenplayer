@@ -65,28 +65,78 @@ function update(data) {
 
     const playerDiv = document.getElementById('videoContainer');
     const greetingDiv = document.getElementById('greeting');
+    const atmosphereDisplay = document.getElementById('atmosphereDisplay');
+
+    playerDiv.innerHTML = '';
 
     if (data.video_ids && data.video_ids.length > 0) {
 
-        const firstVideo = data.video_ids[0];
+        // const firstVideo = data.video_ids[0];
 
-        const playlistString = data.video_ids.length > 1
-            ? `&playlist=${data.video_ids.slice(1).join(',')}`
-            : "";
+        // const playlistString = data.video_ids.length > 1
+        //     ? `&playlist=${data.video_ids.slice(1).join(',')}`
+        //     : "";
 
-        playerDiv.innerHTML = `
-            <iframe 
-                width="100%" 
-                height="380" 
-                src="https://www.youtube.com/embed/${firstVideo}?autoplay=1${playlistString}" 
-                frameborder="0" 
-                allow="autoplay; encrypted-media" 
-                allowfullscreen>
-            </iframe>`;
+        // playerDiv.innerHTML = `
+        //     <iframe 
+        //         width="100%" 
+        //         height="380" 
+        //         src="https://www.youtube.com/embed/${firstVideo}?autoplay=1${playlistString}" 
+        //         frameborder="0" 
+        //         allow="autoplay; encrypted-media" 
+        //         allowfullscreen>
+        //     </iframe>`;
         
-        greetingDiv.innerHTML = null;
-        document.getElementById('atmosphereDisplay').innerText = null;
+        // greetingDiv.innerHTML = null;
+        // document.getElementById('atmosphereDisplay').innerText = null;
+        greetingDiv.innerHTML = '';
+        atmosphereDisplay.innerText = `Atmosphere: ${data.search_words}`;
+
+        const colors = ['blue', 'green', 'pink'];
+
+        data.video_ids.forEach((videoId, index) => {
+            const color = colors[index % colors.length];
+            const budSrc = `images/${color}bud.png`;
+            const flowerSrc = `images/${color}flower.png`;
+            const container = document.createElement('div');
+            container.className = 'flower-container';
+            const img = document.createElement('img');
+            img.src = budSrc;
+            img.className = 'flower-img';
+            img.alt = `${color} flower bud`;
+            const videoWrapper = document.createElement('div');
+            videoWrapper.className = 'video-wrapper';
+            const iframe = document.createElement('iframe');
+            iframe.width = "320";
+            iframe.height = "180";
+            iframe.src = `https://www.youtube.com/embed/${videoId}`; 
+            iframe.frameBorder = "0";
+            iframe.allowFullscreen = true;
+
+            videoWrapper.appendChild(iframe);
+            container.appendChild(img);
+            container.appendChild(videoWrapper);
+            playerDiv.appendChild(container);
+
+            let isOpen = false;
+            img.addEventListener('click', () => {
+                isOpen = !isOpen;
+                
+                if (isOpen) {
+                    img.src = flowerSrc;
+                    img.classList.add('selected');
+                    videoWrapper.classList.add('open');
+                } else {
+                    img.src = budSrc;
+                    img.classList.remove('selected');
+                    videoWrapper.classList.remove('open');
+                    
+                    iframe.src = iframe.src; 
+                }
+            });
+        });
     } else {
         playerDiv.innerHTML = "<p>Could not find a track for this vibe.</p>";
+        atmosphereDisplay.innerText = '';
     }
 }

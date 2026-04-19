@@ -69,7 +69,7 @@ input {
 
 }
 
-img {
+#flowerlogo {
     scale: 30%;
     position:absolute;
 }
@@ -103,5 +103,53 @@ img {
     border-radius: 30px;
 }
 
+#videoContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+}
 
+.flower-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.flower-img {
+    width: 100px;
+    position: relative;
+    scale: 1;
+    cursor: pointer;
+    transition: filter 0.3s ease, transform 0.2 ease;
+}
+
+.flower-img:hover {
+    transform: scale(1.1);
+}
+
+.flower-img.selected {
+    filter: drop-shadow(0 0 15px #faf0ca);
+}
+
+.darkMode .flower-img.selected {
+    filter: drop-shadow(0 0 15px #B1D2CA);
+}
+
+.video-wrapper {
+    display: none;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.video-wrapper.open {
+    display: block;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
