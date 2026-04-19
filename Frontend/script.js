@@ -1,4 +1,4 @@
-const BACKEND_URL = "http://localhost:8000/generate-atmosphere"
+const BACKEND_URL = "http://127.0.0.1:8000/generate-atmosphere";
 
 document.getElementById('geoBtn').addEventListener('click', getGeoloc);
 document.getElementById('zipBtn').addEventListener('click', getZipCode);
@@ -41,8 +41,31 @@ function getZipCode() {
     }
 }
 
+// async function toBackend(payload) {
+//     document.getElementById('atmosphereDisplay').innerText = "Analyzing . . .";
+
+//     try {
+//         const response = await fetch(BACKEND_URL, {
+//             method: 'POST',
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify(payload)
+//         });
+
+//         if (!response.ok) throw new Error("Backend failed");
+
+//         const data = await response.json();
+//         update(data);
+//     } catch (error) {
+//         console.error("Error connecting: ", error);
+//         alert("Could not connect to the backend.")
+//     }
+// }
+
+
 async function toBackend(payload) {
     document.getElementById('atmosphereDisplay').innerText = "Analyzing . . .";
+
+    console.log("📤 Sending payload:", payload);
 
     try {
         const response = await fetch(BACKEND_URL, {
@@ -51,15 +74,26 @@ async function toBackend(payload) {
             body: JSON.stringify(payload)
         });
 
-        if (!response.ok) throw new Error("Backend failed");
+        console.log("📡 Status:", response.status);
 
-        const data = await response.json();
+        const text = await response.text();   // read raw response first
+        console.log("📥 Raw response:", text);
+
+        if (!response.ok) {
+            throw new Error(text);  // show REAL backend error
+        }
+
+        const data = JSON.parse(text);
+        console.log("✅ Parsed data:", data);
+
         update(data);
+
     } catch (error) {
-        console.error("Error connecting: ", error);
-        alert("Could not connect to the backend.")
+        console.error("❌ FULL ERROR:", error);
+        alert("Backend error: " + error.message);
     }
 }
+
 
 function update(data) {
 

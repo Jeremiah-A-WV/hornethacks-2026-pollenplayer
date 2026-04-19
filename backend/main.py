@@ -13,8 +13,10 @@ import asyncio
 
 load_dotenv()
 AMBEE_API_KEY = os.getenv("AMBEE_API_KEY")
+print("API KEY:", AMBEE_API_KEY)
 
 app = FastAPI(title="Pollen Player")
+
 
 # Accounting for javascript on the frontend
 app.add_middleware(
@@ -24,6 +26,17 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=[
+#         "http://127.0.0.1:8080",
+#         "http://localhost:8000"
+#     ],
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
 
 yt = ytmusicapi.YTMusic()
 geolocator = Nominatim(user_agent="pollenplayer")
@@ -73,14 +86,14 @@ async def generate_atmosphere(request: PollenPlayerRequest):
 
     Translation Rules:
     - AQI Thresholds: 
-      * 0-50 (Clean): Bright, airy, upbeat tones.
+      * 0-50 (Clean): Bright, airy, upbeat, poppy tones.
       * 51-100 (Moderate): Neutral, atmospheric, steady.
-      * 101+ (Hazardous): Dark, moody, heavy tones.
+      * 101+ (Hazardous): Dark, moody, heavy, r&b tones.
     - Pollen Thresholds: 
-      * Low counts (0-14): Organic, outdoor vibes.
-      * Moderate counts (15-89): Acoustic, lo-fi.[p[p-[]]]
-      * High count (90-1499): Sleepy, experimental.
-      * Very high count (1500 or more): Indoor, muffled.
+      * Low counts (0-14): Outdoor, fun, party vibes.
+      * Moderate counts (15-89): lo-fi, slightly upbeat.
+      * High count (90-1499): chill, r&b.
+      * Very high count (1500 or more): sleepy, indoor, piano, jazz.
 
     Example Outputs:
     - Bright acoustic outdoor morning
