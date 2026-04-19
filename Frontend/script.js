@@ -52,12 +52,19 @@ function update(data) {
     
     const playerDiv = document.getElementById('videoContainer');
     
-    if (data.video_id) {
+    if (data.video_ids && data.video_ids.length > 0) {
+
+        const firstVideo = data.video_ids[0];
+
+        const playlistString = data.video_ids.length > 1 
+            ? `&playlist=${data.video_ids.slice(1).join(',')}` 
+            : "";
+        
         playerDiv.innerHTML = `
             <iframe 
                 width="100%" 
                 height="380" 
-                src="https://www.youtube.com/embed/${data.video_id}?autoplay=1" 
+                src="https://www.youtube.com/embed/${firstVideo}?autoplay=1${playlistString}" 
                 frameborder="0" 
                 allow="autoplay; encrypted-media" 
                 allowfullscreen>

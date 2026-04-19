@@ -111,17 +111,17 @@ async def generate_atmosphere(request: PollenPlayerRequest):
         search_res = yt.search(query=ai_keywords, filter="songs")
         
         if search_res:
-            video_id = search_res[0]['videoId']
+            video_ids = [item['videoId'] for item in search_res[:10]if 'videoId' in item]
         else:
             print("YOUTUBE RETURNED EMPTY LIST. USING FALLBACK.")
-            video_id = "jfKfPfyJRdk"
+            video_ids = ["jfKfPfyJRdk", "5qap5aO4i9A", "rUxyKA_-grg"]
     except Exception as e:
         print(f"YouTube search crashed: {e}")
-        video_id = "jfKfPfyJRdk"
+        video_ids = ["jfKfPfyJRdk", "5qap5aO4i9A", "rUxyKA_-grg"]
 
     return {
         "aqi": aqi_current,
         "pollen_count": pollen_current,
         "search_words": ai_keywords,
-        "video_id": video_id # Renamed this key!
+        "video_ids": video_ids # Renamed this key! (Again)
     }
