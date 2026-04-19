@@ -72,6 +72,15 @@ async def generate_atmosphere(request: PollenPlayerRequest):
     Pollen: Tree: {pollen_current.tree}, Grass: {pollen_current.grass}, Weed: {pollen_current.weed}
     (If any are over 50: indoor chillhop lo-fi. If all low: acoustic outdoor)
 
+    Translation Rules:
+    - AQI Thresholds: 
+      * 0-50 (Clean): Bright, airy, upbeat tones.
+      * 51-100 (Moderate): Neutral, atmospheric, steady.
+      * 101+ (Hazardous): Dark, moody, dystopian, heavy tones.
+    - Pollen Thresholds: 
+      * Low counts: Acoustic, organic, outdoor vibes.
+      * High counts (above 20): Indoor, muffled, heavy lo-fi, chillhop.
+
     Example Outputs:
     - Dark dystopian synthwave instrumental
     - Bright acoustic outdoor morning
@@ -83,14 +92,7 @@ async def generate_atmosphere(request: PollenPlayerRequest):
     # You are an atmospheric music curator. Translate the following environmental data into a 
     # 4 to 6 word YouTube Music search query for an instrumental song.
 
-    # Translation Rules:
-    # - AQI Thresholds: 
-    #   * 0-50 (Clean): Bright, airy, upbeat tones.
-    #   * 51-100 (Moderate): Neutral, atmospheric, steady.
-    #   * 101+ (Hazardous): Dark, moody, dystopian, heavy tones.
-    # - Pollen Thresholds: 
-    #   * Low counts: Acoustic, organic, outdoor vibes.
-    #   * High counts (above 20): Indoor, muffled, heavy lo-fi, chillhop.
+    
 
     # Current Environment:
     # AQI: {aqi_current}
