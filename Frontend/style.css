@@ -83,7 +83,7 @@ input {
 }
 
 .darkMode{
-    background-color: #051623;
+    background-image: url('/Frontend/images/stars.jpg');
 }
 
 .darkMode input {
@@ -136,6 +136,22 @@ input {
 .darkMode .flower-img.selected {
     filter: drop-shadow(0 0 15px #B1D2CA);
 }
+
+.darkMode #atmosphereDisplay {
+    color: white;
+
+}
+
+.darkMode #recommendation {
+    color: white;
+
+}
+
+.darkMode #videoContainer {
+    color:white;
+
+}
+
 
 .video-wrapper {
     display: none;

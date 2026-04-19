@@ -41,6 +41,44 @@ app.add_middleware(
 yt = ytmusicapi.YTMusic()
 geolocator = Nominatim(user_agent="pollenplayer")
 
+def generate_recommendation(aqi, pollen):
+    if aqi <= 50:
+        air = "Clean air!"
+    elif aqi <= 100:
+        air = "Moderate air."
+    else:
+        air = "Heavy air! Maybe stay inside?"
+
+    max_pollen = max(
+        pollen.tree or 0,
+        pollen.grass or 0,
+        pollen.weed or 0
+    )
+
+    if max_pollen < 15:
+        pollen_state = "Low pollen! Enjoy your Day!"
+    elif max_pollen < 90:
+        pollen_state = "Moderate pollen."
+    else:
+        pollen_state = "High pollen! Wear a mask and don't forget your meds!"
+
+    return f"{air} \n {pollen_state}"
+
+
+def parse_duration(d):
+    if not d:
+        return 0
+    if isinstance(d, int):
+        return d
+    if isinstance(d, str):
+        parts = d.split(":")
+        try:
+            return int(parts[0]) * 60 + int(parts[1])
+        except:
+            return 0
+    return 0
+
+
 @app.post("/generate-atmosphere", response_model=PollenPlayerResponse)
 async def generate_atmosphere(request: PollenPlayerRequest):
     lat = request.latitude
@@ -68,14 +106,19 @@ async def generate_atmosphere(request: PollenPlayerRequest):
             aqi_current = aqi_res.json().get("stations", [{}])[0].get("AQI", 42)
             pollen_count = pollen_res.json().get("data", [{}])[0].get("Count", {})
 
+            
+
             pollen_current = PollenCount(
                 tree=pollen_count.get("tree_pollen", None),
                 grass=pollen_count.get("grass_pollen", None),
                 weed=pollen_count.get("weed_pollen", None)
+                
             )
+            recommendation = generate_recommendation(aqi_current, pollen_current)
+            
+
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Ambee Fetch Failed: {e}")
-        
 
     ai_prompt = f"""
     You are an AI music curator. Your ONLY job is to output a 4-word YouTube search query for a song. Do not say "Here is your query" or use quotes.
@@ -149,7 +192,7 @@ async def generate_atmosphere(request: PollenPlayerRequest):
             max_song_length = 6 * 60
             
             for item in search_res:
-                duration = item.get('duration_seconds', 0)
+                duration = parse_duration(item.get('duration'))
 
                 if 'videoId' in item and 0 < duration <= max_song_length:
                     video_ids.append(item['videoId'])
@@ -169,5 +212,8 @@ async def generate_atmosphere(request: PollenPlayerRequest):
         "aqi": aqi_current,
         "pollen_count": pollen_current,
         "search_words": ai_keywords,
-        "video_ids": video_ids # Renamed this key! (Again)
+        "video_ids": video_ids, # Renamed this key! (Again)
+        "recommendation": recommendation
     }
+
+

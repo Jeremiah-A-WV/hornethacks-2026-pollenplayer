@@ -100,6 +100,7 @@ function update(data) {
     const playerDiv = document.getElementById('videoContainer');
     const greetingDiv = document.getElementById('greeting');
     const atmosphereDisplay = document.getElementById('atmosphereDisplay');
+    const rec = document.getElementById('recommendation');
 
     playerDiv.innerHTML = '';
 
@@ -125,6 +126,8 @@ function update(data) {
         // document.getElementById('atmosphereDisplay').innerText = null;
         greetingDiv.innerHTML = '';
         atmosphereDisplay.innerText = `Atmosphere: ${data.search_words}`;
+        rec.innerText = data.recommendation;
+
 
         const colors = ['blue', 'green', 'pink'];
 
