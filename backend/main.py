@@ -76,18 +76,19 @@ async def generate_atmosphere(request: PollenPlayerRequest):
     - AQI Thresholds: 
       * 0-50 (Clean): Bright, airy, upbeat tones.
       * 51-100 (Moderate): Neutral, atmospheric, steady.
-      * 101+ (Hazardous): Dark, moody, dystopian, heavy tones.
+      * 101+ (Hazardous): Dark, moody, heavy tones.
     - Pollen Thresholds: 
-      * Low counts: Acoustic, organic, outdoor vibes.
-      * High counts (above 20): Indoor, muffled, heavy lo-fi, chillhop.
+      * Low counts (0-14): Organic, outdoor vibes.
+      * Moderate counts (15-89): Acoustic, lo-fi.
+      * High count (90-1499): Sleepy, experimental.
+      * Very high count (1500 or more): Indoor, muffled.
 
     Example Outputs:
-    - Dark dystopian synthwave instrumental
     - Bright acoustic outdoor morning
     - Indoor chillhop lofi beats
 
     DO NOT GIVE ANY EXPLAINATION OR ANY OTHER WORDS JUST
-    Generate the 3-word Search Query for the current environment:
+    Generate the 3-word (maximum of 4 words) Search Query for the current environment:
     """
     # You are an atmospheric music curator. Translate the following environmental data into a 
     # 4 to 6 word YouTube Music search query for an instrumental song.
@@ -113,13 +114,25 @@ async def generate_atmosphere(request: PollenPlayerRequest):
         search_res = yt.search(query=ai_keywords, filter="songs")
         
         if search_res:
-            video_ids = [item['videoId'] for item in search_res[:10]if 'videoId' in item]
+            video_ids = []
+            max_song_length = 6 * 60
+            
+            for item in search_res:
+                duration = item.get('duration_seconds', 0)
+
+                if 'videoId' in item and 0 < duration <= max_song_length:
+                    video_ids.append(item['videoId'])
+                
+                if len(video_ids) >= 10:
+                    break
+                    
         else:
             print("YOUTUBE RETURNED EMPTY LIST. USING FALLBACK.")
-            video_ids = ["jfKfPfyJRdk", "5qap5aO4i9A", "rUxyKA_-grg"]
+            video_ids = ["jfKfPfyJRdk", "5qap5aO4i9A", "rUxyKA_-grg"] 
+            
     except Exception as e:
         print(f"YouTube search crashed: {e}")
-        video_ids = ["jfKfPfyJRdk", "5qap5aO4i9A", "rUxyKA_-grg"]
+        video_ids = ["jfKfPfyJRdk", "5qap5aO4i9A"]
 
     return {
         "aqi": aqi_current,
