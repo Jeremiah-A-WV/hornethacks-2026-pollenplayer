@@ -4,13 +4,9 @@ uvicorn
 pydantic
 requests
 dotenv
+geopy
+asyncio
 
 # Processing
 ollama
 ytmusicapi
-
-# User interface
-streamlit
-streamlit_geolocation
-st_pages
-streamlit_lottie
