@@ -185,20 +185,37 @@ async def generate_atmosphere(request: PollenPlayerRequest):
         ai_keywords = "Generic lo-fi beats"
 
     try:
-        search_res = yt.search(query=ai_keywords, filter="songs", limit=50)
+        search_res = yt.search(query=ai_keywords, filter="videos", limit=20)
         
         if search_res:
-            video_ids = []
-            max_song_length = 6 * 60
+            # video_ids = []
+            # max_song_length = 6 * 60
             
-            for item in search_res:
-                duration = parse_duration(item.get('duration'))
+            # for item in search_res:
+            #     duration = parse_duration(item.get('duration'))
 
-                if 'videoId' in item and 0 < duration <= max_song_length:
-                    video_ids.append(item['videoId'])
+            #     if 'videoId' in item and 0 < duration <= max_song_length:
+            #         video_ids.append(item['videoId'])
                 
-                if len(video_ids) >= 10:
-                    break
+            #     if len(video_ids) >= 10:
+            #         break
+            video_ids = []
+
+        for item in search_res:
+            video_id = item.get("videoId")
+            title = item.get("title")
+
+            if not video_id:
+                continue
+
+            # skip obvious bad results
+            if "live" in title.lower():
+                continue
+
+            video_ids.append(video_id)
+
+            if len(video_ids) >= 8:
+                break
                     
         else:
             print("YOUTUBE RETURNED EMPTY LIST. USING FALLBACK.")

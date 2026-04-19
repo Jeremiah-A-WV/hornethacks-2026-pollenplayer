@@ -146,7 +146,8 @@ function update(data) {
             const iframe = document.createElement('iframe');
             iframe.width = "320";
             iframe.height = "180";
-            iframe.src = `https://www.youtube.com/embed/${videoId}`; 
+            // iframe.src = `https://www.youtube.com/embed/${videoId}`; 
+            iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`;
             iframe.frameBorder = "0";
             iframe.allowFullscreen = true;
 
