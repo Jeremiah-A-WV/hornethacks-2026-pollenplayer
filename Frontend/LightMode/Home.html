@@ -32,13 +32,27 @@
             <input class="button" type="submit" for="Zipcode" value="Submit">
 
         </form>
+
+        <script>
+        function toggle() {
+        var body = document.body;
+        var heading = document.h1;
+        var input = document.input;
+        var button = document.button;
+
+        body.classList.toggle("darkMode");
+        heading.classList.toggle("darkMode");
+        input.classList.toggle("darkMode");
+        button.classList.toggle("darkMode");
+        }
+</script>
          
 
     </body>
 
     <footer>
         <br><br><br>
-        <a href='../../Frontend/DarkMode/DarkHome.html' class="button">Dark Mode</a>
+        <button class="button" onclick="toggle()">Toggle Dark Mode</button>
     </footer>
 
 
