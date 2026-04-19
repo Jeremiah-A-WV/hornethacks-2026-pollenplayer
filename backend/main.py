@@ -65,12 +65,11 @@ async def generate_atmosphere(request: PollenPlayerRequest):
         
 
     ai_prompt = f"""
-    You are an AI music curator. Your ONLY job is to output a 4-word YouTube search query for an instrumental song. Do not say "Here is your query" or use quotes.
+    You are an AI music curator. Your ONLY job is to output a 4-word YouTube search query for a song. Do not say "Here is your query" or use quotes.
 
     Environment Data:
     AQI: {aqi_current} (If high: dark, dystopian, moody. If low: bright, upbeat)
     Pollen: Tree: {pollen_current.tree}, Grass: {pollen_current.grass}, Weed: {pollen_current.weed}
-    (If any are over 50: indoor chillhop lo-fi. If all low: acoustic outdoor)
 
     Translation Rules:
     - AQI Thresholds: 
@@ -111,7 +110,7 @@ async def generate_atmosphere(request: PollenPlayerRequest):
         ai_keywords = "Generic lo-fi beats"
 
     try:
-        search_res = yt.search(query=ai_keywords, filter="songs")
+        search_res = yt.search(query=ai_keywords, filter="songs", limit=50)
         
         if search_res:
             video_ids = []
